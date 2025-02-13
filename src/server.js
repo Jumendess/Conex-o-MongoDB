@@ -52,6 +52,16 @@ app.get("/get-user/:user_id", async (req, res) => {
   }
 });
 
+// Rota para listar todos os usuários
+app.get("/get-all-users", async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json({ success: true, users });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Iniciar o servidor
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🔥 Servidor rodando na porta ${PORT}`));
